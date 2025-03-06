@@ -9,7 +9,7 @@ namespace: nodejs
 images:
 - name: aks-k8s-app-rollouts
   newName: yemiwebby/aks-k8s-app-rollouts
-  newTag: 94c16803ca85110bf2612044ff52ae9554ea330c
+  newTag: 60b3a6d695d538c0b08940144cbe70d303e71be9
 - name: aks-k8s-rollouts
   newName: aks-k8s-rollouts
   newTag: v1
