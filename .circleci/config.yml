@@ -7,8 +7,6 @@ orbs:
 
 jobs:
   argocd-manual-sync:
-    # docker:
-    #   - image: cimg/debian:12.3
     docker:
       - image: cimg/base:stable
     resource_class: medium
@@ -80,16 +78,8 @@ jobs:
           perform-login: true
           resource-group: << parameters.resource-group >>
       - run:
-          name: Install Azure CLI (if missing)
-          command: |
-            if ! command -v az &> /dev/null; then
-              curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-            fi
-      - run:
           name: Apply ArgoCD Config
           command: kubectl apply -f argocd/config.yaml
-      # - kubernetes/create-or-update-resource:
-      #     resource-file-path: argocd/config.yaml
 
   bump-docker-tag-kustomize:
     docker:
