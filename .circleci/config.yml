@@ -8,7 +8,9 @@ orbs:
 jobs:
   argocd-manual-sync:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/debian:12.3
+    # docker:
+    #   - image: cimg/base:stable
     resource_class: medium
     parameters:
       server:
@@ -24,6 +26,12 @@ jobs:
           Password for ArgoCD
         type: string
     steps:
+      - run:
+          name: Fix Debian Sources (if using Debian Stretch)
+          command: |
+            sudo sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list
+            sudo sed -i 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list
+            sudo apt-get update || true
       - run:
           name: Install ArgoCD CLI
           command: |
