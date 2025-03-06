@@ -70,11 +70,23 @@ jobs:
       - run:
           name: Pull Updated code from repo
           command: git pull origin $CIRCLE_BRANCH
+      - run:
+          name: Fix Debian Sources (For Stretch)
+          command: |
+            sudo sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /etc/apt/sources.list
+            sudo sed -i 's|http://security.debian.org/debian-security|http://archive.debian.org/debian-security|g' /etc/apt/sources.list
+            sudo apt-get update -o Acquire::Check-Valid-Until=false || true
       - azure-aks/update-kubeconfig-with-credentials:
           cluster-name: << parameters.cluster-name >>
           install-kubectl: true
           perform-login: true
           resource-group: << parameters.resource-group >>
+      - run:
+          name: Install Azure CLI (if missing)
+          command: |
+            if ! command -v az &> /dev/null; then
+              curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+            fi
       - run:
           name: Apply ArgoCD Config
           command: kubectl apply -f argocd/config.yaml
