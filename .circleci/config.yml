@@ -7,10 +7,10 @@ orbs:
 
 jobs:
   argocd-manual-sync:
-    docker:
-      - image: cimg/debian:12.3
     # docker:
-    #   - image: cimg/base:stable
+    #   - image: cimg/debian:12.3
+    docker:
+      - image: cimg/base:stable
     resource_class: medium
     parameters:
       server:
