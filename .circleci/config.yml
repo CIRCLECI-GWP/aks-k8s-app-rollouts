@@ -44,7 +44,10 @@ jobs:
   argocd-configure:
     machine: # Change from azure-aks/default if unsupported
       image: ubuntu-2204:2023.10.1
-    # executor: azure-aks/default
+    # docker:
+    #   - image: cimg/base:stable
+    # resource_class: medium
+    executor: azure-aks/default
     parameters:
       cluster-name:
         description: |
