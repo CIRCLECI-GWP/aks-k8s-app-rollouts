@@ -18,8 +18,8 @@ spec:
       nodeSelector:
         "beta.kubernetes.io/os": linux
       containers:
-        - name: aks-k8s-rollouts
-          image: aks-k8s-rollouts
+        - name: aks-k8s-app-rollouts
+          image: aks-k8s-app-rollouts
           ports:
             - name: http
               containerPort: 1337
