@@ -67,8 +67,11 @@ jobs:
           install-kubectl: true
           perform-login: true
           resource-group: << parameters.resource-group >>
-      - kubernetes/create-or-update-resource:
-          resource-file-path: argocd/config.yaml
+      - run:
+          name: Apply ArgoCD Config
+          command: kubectl apply -f argocd/config.yaml
+      # - kubernetes/create-or-update-resource:
+      #     resource-file-path: argocd/config.yaml
 
   bump-docker-tag-kustomize:
     docker:
