@@ -40,7 +40,7 @@ jobs:
             $SUDO curl --insecure -sSL -o /usr/local/bin/argocd $URL
             $SUDO chmod +x /usr/local/bin/argocd
       - run:
-          name: ArgoCD CLI login
+          name: ArgoCD CLI login.
           command: argocd login << parameters.server >> --insecure --username << parameters.username >> --password << parameters.password >>
       - run:
           name: Manual sync
